@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  DatadogLogForwarderFunction:      # just a name, could be anything
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: aws-dd-forwarder-3.91.0/           # should match datadog lamda function folder name
+      Handler: lambda_function.lambda_handler     # in the fomat of [filename.handlername]
+      Runtime: python3.9                          # should match the supported python runtime version
+      Timeout: 60
+      Environment:
+        Variables:
+          DD_API_KEY: <REPLACE_WITH_YOUR_API_KEY>
+          DD_SITE: datadoghq.com
+          # DD_LOG_LEVEL: debug
+      Architectures:
+        - x86_64
+      Events:
+        CloudWatchSample:
+          Type: CloudWatchLogs # More info about cloudwatch log https://github.com/aws/serverless-application-model/blob/master/versions/2016-10-31.md#cloudwatchlogs
+          Properties:
+            LogGroupName: yong-local-debug            # only used when deploying to aws. Must exists before deploying
+            FilterPattern: ""                         # only used when deploying to aws

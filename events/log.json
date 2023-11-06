@@ -1,0 +1,16 @@
+{
+    "messageType": "DATA_MESSAGE",
+    "owner": "123456789012",
+    "logGroup": "a-fake-cw-logs-datadog-could-be-anything",
+    "logStream": "beautifulstream",
+    "subscriptionFilters": [
+        "FilterTest"
+    ],
+    "logEvents": [
+        {
+            "id": "34622316099697884706540976068822859012661220141643892546",
+            "timestamp": 1698906247000,
+            "message": "TEST MESSAGE FROM LOCAL PC"
+        }
+    ]
+}
